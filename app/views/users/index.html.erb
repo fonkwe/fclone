@@ -1,0 +1,15 @@
+<ul class="navbar-nav ml-auto">
+ <% if user_signed_in? %>
+   <li class="nav-item">
+     <button class="text-white btn btn-secondary", data-
+     toggle="modal" data-target="#noticeModal">
+       <i class="fas fa-bell"></i>
+       <%= current_user.notifications.count%>
+     </button>
+   </li>
+   
+   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+     <%= link_to "My Profile", user_path(current_user), class: "dropdown-item font-raleway" %>
+     <%= link_to "Log out", destroy_user_session_path, class: "dropdown-item font-raleway", method: :delete %>
+    </div>
+</ul>
