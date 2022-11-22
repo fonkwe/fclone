@@ -10,7 +10,6 @@ Rails.application.routes.draw do
     end
   end
   
-  put '/users/:id', to:  'users#update_img'
 
   resources :posts, only: %i[index new create show destroy] do
       resources :likes, only: %i[create]
