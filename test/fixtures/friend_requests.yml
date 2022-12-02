@@ -2,10 +2,10 @@
 
 one:
   user: one
-  friend: one
-  status: false
+  friend_email: MyString
+  accepted: false
 
 two:
   user: two
-  friend: two
-  status: false
+  friend_email: MyString
+  accepted: false

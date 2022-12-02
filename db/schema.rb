@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_18_113125) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_02_150907) do
   create_table "comments", force: :cascade do |t|
     t.text "content"
     t.integer "post_id", null: false
@@ -21,13 +21,23 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_18_113125) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
-  create_table "friendships", force: :cascade do |t|
-    t.integer "sent_to_id", null: false
-    t.integer "sent_by_id", null: false
+  create_table "friend_requests", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "friend_email"
+    t.boolean "accepted", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["sent_by_id"], name: "index_friendships_on_sent_by_id"
-    t.index ["sent_to_id"], name: "index_friendships_on_sent_to_id"
+    t.index ["user_id"], name: "index_friend_requests_on_user_id"
+  end
+
+  create_table "friendships", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "friend_id", null: false
+    t.boolean "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["friend_id"], name: "index_friendships_on_friend_id"
+    t.index ["user_id"], name: "index_friendships_on_user_id"
   end
 
   create_table "likes", force: :cascade do |t|
@@ -66,8 +76,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_18_113125) do
 
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
-  add_foreign_key "friendships", "sent_bies"
-  add_foreign_key "friendships", "sent_tos"
+  add_foreign_key "friend_requests", "users"
+  add_foreign_key "friendships", "users"
   add_foreign_key "likes", "comments"
   add_foreign_key "likes", "posts"
   add_foreign_key "likes", "users"
