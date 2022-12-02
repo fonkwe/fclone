@@ -1,0 +1,22 @@
+<% unless @friend_requests.empty? %>
+  <div class="card my-5 py-3 bg-light shadow">
+      <h2 class="center pb-3 text-dark border-bottom">Pending Friend Requests</h2> 
+      <% @friend_requests.each do |user|%> <!-- Shows all users friend requests has been sent to -->
+        <div class="d-flex align-items-center mb-2 border-bottom py-2">
+          <div class="col-auto p-0 pl-5 text-capitalize"> 
+            <%= link_to user_path(user) do %>
+            <%= user.full_name %>
+            <% end %>
+          </div>
+          <div class="col-auto p-0 px-1">|</div>
+          <div class="col-auto p-0">
+            <button class= "btn btn-pending shadow" data-toggle="modal" data-target="#decisionModal">
+                <i class="fas fa-envelope"></i> Pending Friend Request... 
+            </button>
+          </div>
+        </div>
+          <%= render 'friendships/decisionModal', object: user %>
+        <br><br>
+      <% end %>
+  </div>
+<% end %>
