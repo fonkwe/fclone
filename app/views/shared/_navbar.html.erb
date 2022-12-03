@@ -7,7 +7,9 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <% if user_signed_in? %> 
-                Signed in as <%= current_user.email %>. Not you? 
+                <li class="nav-item">
+                    Signed in as <%= current_user.email %>. Not you? 
+                </li>
                 <li class="nav-item">
                   <%= link_to "Sign out", destroy_user_session_path, class: "nav-link" %>
                 </li>
